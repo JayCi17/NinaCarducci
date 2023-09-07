@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-sharp-responsive": "^0.4.1",
+    "terser": "^5.19.4"
+  },
+  "name": "ninacarducci.github.io",
+  "version": "1.0.0",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
