@@ -3,6 +3,7 @@ const sharpResponsive = require("gulp-sharp-responsive") ;
 const CleanCSS = require("gulp-clean-css");
 const terser = require ("gulp-terser");
 const img = () => src(["./assets/images/*.{png,jpg,webp}", "./assets/images/gallery/**/*.{jpg,png,webp,avif}", "./assets/images/slider/*.{jpg,png,webp}","./assets/images/*.{jpg,png,webp}",])
+const critical = require('critical')
 
 .pipe(sharpResponsive({
     formats : [
@@ -27,8 +28,32 @@ function minifyJs(){
     .pipe(dest("./assets/bootstrap"))
 }
 
+function generateCriticalCss(){
+    return critical.generate({
+        inline:true,
+        base:"./assets",
+        src:"index.html",
+        css: ["./assets/styles.css", "./assets/bootsrap.min.css"],
+        width:1300,
+        height:900,
+
+        target:{
+            css:"critical.css",
+            html:"index-critical.html",
+            uncritical:"uncritical.css",
+        },
+        extract:true,
+        ignore : {
+            atrule : ["@font-face"],
+            rule : [/some-regexp/],
+            decl : (node, value)=>/big-image\.png/.test(value),
+        },
+    })
+};
+
 module.exports = {
     img,
     minifyCss,
     minifyJs,
+    generateCriticalCss,
 };
