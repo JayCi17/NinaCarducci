@@ -1,9 +1,9 @@
-const {src, dest}= require("gulp");
+const {src, dest, series}= require("gulp");
 const sharpResponsive = require("gulp-sharp-responsive") ;
 const CleanCSS = require("gulp-clean-css");
 const terser = require ("gulp-terser");
 const img = () => src(["./assets/images/*.{png,jpg,webp}", "./assets/images/gallery/**/*.{jpg,png,webp,avif}", "./assets/images/slider/*.{jpg,png,webp}","./assets/images/*.{jpg,png,webp}",])
-const critical = require('critical')
+
 
 .pipe(sharpResponsive({
     formats : [
@@ -29,7 +29,8 @@ function minifyJs(){
 }
 
 function generateCriticalCss(){
-    return critical.generate({
+    const critical = require("critical");
+   critical.generate({
         inline:true,
         base:"./assets",
         src:"index.html",
@@ -56,4 +57,5 @@ module.exports = {
     minifyCss,
     minifyJs,
     generateCriticalCss,
+    default : series(img, minifyCss, minifyJs, generateCriticalCss),
 };

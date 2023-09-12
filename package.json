@@ -3,6 +3,7 @@
     "gulp": "^4.0.2",
     "gulp-clean-css": "^4.3.0",
     "gulp-sharp-responsive": "^0.4.1",
+    "gulp-terser": "^2.1.0",
     "terser": "^5.19.4"
   },
   "name": "ninacarducci.github.io",
